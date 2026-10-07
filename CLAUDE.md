@@ -191,9 +191,10 @@ After the Backend is live:
 4. Deploy the frontend again and run the CRM smoke test in `CRM_CAPTURE.md`.
 
 ### Step 11: Set Up Autonomous Publishing (GitHub Actions)
-The repo includes two GitHub Actions workflows in `.github/workflows/`:
+The repo includes three GitHub Actions workflows in `.github/workflows/`:
 - **`daily-publish.yml`** — ships as manual-first and calls the Backend's `/api/write-article` route to write and publish an article
 - **`weekly-trends.yml`** — ships as manual-first and calls the Backend's implemented `/api/trend-scan` route to add new ideas to the content calendar
+- **`weekly-seo-sync.yml`** — ships as manual-first and calls the Backend's implemented `/api/seo/sync-rankings` route to pull real Google Search Console numbers onto `seo_meta`. Run this one manually the same day the real domain goes live, regardless of when you enable its schedule — see the Backend's `SEO.md`, Search Console has no backfill.
 
 To enable these, add the following **secrets** to your GitHub repo (Settings > Secrets and variables > Actions > New repository secret):
 1. **`API_SECRET_KEY`** — the shared secret between Frontend and Backend
@@ -203,9 +204,10 @@ And add this **repository variable** (Settings > Secrets and variables > Actions
 
 The workflows automatically sign each request with `x-timestamp` and `x-signature`, so you do not need Claude Code or hidden slash commands for automation.
 
-Test both workflows manually before enabling cron:
+Test all three workflows manually before enabling cron:
 - `Weekly Trend Scan` requires the Backend's `ANTHROPIC_API_KEY` and seeded `brand_context`; it adds calendar ideas. In safe mode, new ideas are `planned`; in autonomous mode, new ideas are `approved`.
 - `Daily Article Publish` requires approved topics in the content calendar; in safe mode it creates drafts, and in autonomous mode it publishes live articles.
+- `Weekly SEO Sync` requires the Backend's `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY` and `GOOGLE_SEARCH_CONSOLE_SITE_URL`; it fills in the four `seo_meta` ranking columns from real Search Console data.
 
 Once both repos are deployed and your Actions secrets/variables are configured, you can uncomment the `schedule:` block in the workflow files to make them run automatically.
 
@@ -219,8 +221,11 @@ Before assuming the setup is done, verify the whole loop:
 5. After approving one idea, `daily-publish.yml` creates a draft or published article
 6. A frontend lead submission returns `via: "backend"`, appears once in CRM,
    and has a `form_submitted` timeline activity
+7. Once the real domain is live, `weekly-seo-sync.yml` has been run manually
+   at least once — check that it isn't optional, Search Console has no
+   backfill, see the Backend's `SEO.md`
 
-If all six checks pass, the shared database, CRM capture, backend connection,
+If all seven checks pass, the shared database, CRM capture, backend connection,
 and publishing automations are working correctly.
 
 ### Need Help?

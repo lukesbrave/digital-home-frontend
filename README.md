@@ -99,8 +99,9 @@ After both repos are configured, do this quick health check:
 3. Open the Backend test route and confirm it can reach the Frontend: `/api/test-frontend`
 4. Manually run `weekly-trends.yml` in GitHub Actions and confirm new `content_calendar` ideas appear. This requires the Backend's `ANTHROPIC_API_KEY` and seeded `brand_context`.
 5. Approve one idea, then manually run `daily-publish.yml` and confirm a draft or published article appears in the blog. Enable the cron schedules only after both manual runs succeed.
+6. Once the real domain is live, manually run `weekly-seo-sync.yml` and confirm `seo_meta` rows get real numbers. This requires the Backend's Search Console service account — see the Backend's `SEO.md`. Do this the same day the domain goes live; Search Console has no backfill.
 
-If those five checks pass, the shared Supabase setup, cross-repo connection, and automation loop are all working.
+If those six checks pass, the shared Supabase setup, cross-repo connection, and automation loop are all working.
 
 ## Community
 
