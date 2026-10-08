@@ -49,6 +49,8 @@ Before anything else, check if the user has Node.js installed by running `node -
    - public read access is limited to published content and active offers
    - admin and agent operations happen through protected API routes
 
+**Adding your own tables?** Numbers `001`–`899` are reserved for this starter and the Backend starter — never renumber or reuse one of their migration files, even if you've restructured your fork. Give your own migrations a number `900` or higher (e.g. `900_my_feature.sql`). The Backend's upgrade flow references specific vendor filenames by number (e.g. `002_crm_core.sql`); reusing a reserved number means a future upgrade can silently apply the wrong file or skip one.
+
 ### Step 3: Create an Admin User
 1. In Supabase dashboard, go to **Authentication > Users > Add user**
 2. Set an email and password — this is your login for the Backend dashboard
