@@ -16,3 +16,8 @@ lead reaches the backend through its capture endpoint, and record VERSION 2.5.4.
 No database migration or new credential is required. Do not replace customer
 content with the starter. The bundled CLAUDE.md changes separate later content
 and design work from completing a verified foundation.
+
+## Member database changes
+
+See CLAUDE.md and the backend UPGRADE.md for the reserved migration ranges.
+Review existing custom SQL and applied history before changing any filenames.

@@ -49,6 +49,20 @@ Before anything else, check if the user has Node.js installed by running `node -
    - public read access is limited to published content and active offers
    - admin and agent operations happen through protected API routes
 
+### Member database changes
+
+Keep official starter migration filenames and contents unchanged. Numbers
+`001`–`899` are reserved for official migrations in each repository. For a new
+member migration use an unused three-digit number `900`–`999`, for example
+`900_my_feature.sql`. Current tools require `NNN_name.sql`; four-digit and
+timestamp filenames are ignored. History identifies repository plus full filename,
+so both repositories can start at `001`. The backend upgrader applies target-release
+backend migrations; member migrations require separate review and application.
+If custom migrations already use reserved numbers, inspect their SQL, actual schema
+and applied history before deciding a mapping. Do not blindly rename or replay
+applied migrations, or rewrite history. See the backend `UPGRADE.md`.
+
+
 ### Step 3: Create an Admin User
 1. In Supabase dashboard, go to **Authentication > Users > Add user**
 2. Set an email and password — this is your login for the Backend dashboard
