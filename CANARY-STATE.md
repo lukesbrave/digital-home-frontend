@@ -7,3 +7,5 @@ configuration branch. Bootstrap exists only to establish the two cross-bindings.
 All private keys are local ignored files and Worker secrets, never git.
 
 Status: configuration prepared; not deployed.
+
+Canary-only /canary-check page exercises the existing /api/leads route with synthetic browser input and requires the authoritative backend path. It is not part of the starter release branch.
