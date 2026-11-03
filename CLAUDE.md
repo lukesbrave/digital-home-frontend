@@ -43,11 +43,24 @@ Before anything else, check if the user has Node.js installed by running `node -
 ### Step 2: Run Database Migrations
 1. In your Supabase dashboard, go to **SQL Editor**
 2. Run each migration file from `supabase/migrations/` in order (001 through 011)
-3. Then run the Backend migration from the Backend Starter repo:
-   - `digital-home-backend/supabase/migrations/001_backend_core.sql`
+3. Then follow the selected Backend release’s CLAUDE.md and apply its official
+   migrations in order; `001_backend_core.sql` alone is not the complete backend schema.
 4. The shared database is now ready for both repos:
    - public read access is limited to published content and active offers
    - admin and agent operations happen through protected API routes
+
+### Member database changes
+
+Keep official starter migration filenames and contents unchanged. Numbers
+`001`–`899` are reserved for official migrations in each repository. For a new
+member migration use an unused three-digit number `900`–`999`, for example
+`900_my_feature.sql`. Current tools require `NNN_name.sql`; four-digit and
+timestamp filenames are ignored. History identifies repository plus full filename,
+so both repositories can start at `001`. The backend upgrader applies target-release
+backend migrations; member migrations require separate review and application.
+If custom migrations already use reserved numbers, inspect their SQL, actual schema
+and applied history before deciding a mapping. Do not blindly rename or replay
+applied migrations, or rewrite history. See the backend `UPGRADE.md`.
 
 ### Step 3: Create an Admin User
 1. In Supabase dashboard, go to **Authentication > Users > Add user**
@@ -337,7 +350,7 @@ Server-side secrets must be set using `wrangler secret put`. The Cloudflare dash
   - agent-capable: selected write routes using `x-api-key`
 - Every page should include dynamic JSON-LD from the `entities` table.
 - Visitor tracking is anonymous until opt-in. No PII before email capture.
-- **CRITICAL — Shared database types:** When you modify `src/types/database.ts`, you MUST also update the same file in the Backend project. These two files must always be identical.
+- **Shared database types:** Review and merge schema changes into both repositories’ `src/types/database.ts`. Preserve member columns and custom types in both copies. A clean or committed file may still contain customisations; never replace it wholesale with starter types. Verify both builds after the merge.
 - **CRM capture:** public lead forms route through the Backend so activities and
   workflows run. Payments, memberships and entitlements must call
   `captureLeadServerSide(payload, {allowFallback:false})`; see `CRM_CAPTURE.md`.
