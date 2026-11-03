@@ -20,3 +20,11 @@ paired with backend migrations 004–007; this repository does not install them.
 Merge the new type blocks into a member's generated types; never replace their
 custom columns/types with this file. Existing frontend design, tracking, routes,
 media and employee files are unchanged. No version bump or publication.
+
+## Hosted schema alignment — 2026-11-03
+
+Shared Database/Json types regenerated from the isolated fresh 19-migration
+Starter schema. Removed inherited optional-module table placeholders, preserved
+local helper aliases. Handles nullable calendar states and publication dates
+without inventing dates. For member Homes generate from their actual full schema;
+never replace installed Studio or custom table types with this fresh-install file.

@@ -110,7 +110,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         .eq("id", id)
         .single();
 
-      if (current && !["draft", "published", "writing"].includes(current.status)) {
+      if (current && !["draft", "published", "writing"].includes(current.status ?? '')) {
         return errorResponse(
           "content_object_id can only be set when status is writing, draft, or published",
           422

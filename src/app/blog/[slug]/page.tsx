@@ -87,7 +87,7 @@ export default async function ArticlePage({
               {article.content_type}
             </span>
             <span className="rounded-full border border-white/10 px-3 py-1.5">
-              {formatDate(publishedAt)}
+              {(publishedAt ? formatDate(publishedAt) : 'Date unavailable')}
             </span>
             <span className="rounded-full border border-white/10 px-3 py-1.5">
               {readingTime} min read
@@ -151,7 +151,7 @@ export default async function ArticlePage({
               <div className="space-y-3 text-sm text-neutral-300">
                 <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-3">
                   <span className="text-white/45">Published</span>
-                  <span>{formatDate(publishedAt)}</span>
+                  <span>{(publishedAt ? formatDate(publishedAt) : 'Date unavailable')}</span>
                 </div>
                 <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-3">
                   <span className="text-white/45">Reading time</span>
