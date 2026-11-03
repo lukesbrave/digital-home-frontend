@@ -49,3 +49,6 @@ content-corpus/
 
 # Agent worktrees live inside the repo
 .worktrees/
+
+# Private canary settings
+.canary-*

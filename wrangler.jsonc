@@ -1,25 +1,28 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "digital-home-frontend",
+  "name": "starter3-canary-frontend",
   "compatibility_date": "2026-05-01",
-  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
   "main": ".open-next/worker.js",
+  "workers_dev": true,
   "assets": {
     "binding": "ASSETS",
     "directory": ".open-next/assets"
   },
-  // Set service to the actual backend Worker in this account. The CRM capture
-  // path uses this binding on workers.dev and custom domains alike.
-  "services": [{ "binding": "BACKEND_WORKER", "service": "digital-home-backend" }],
   "observability": {
     "enabled": true
   },
-  // Runtime duplicates of NEXT_PUBLIC_ vars — Workers can't read NEXT_PUBLIC_ at runtime
-  // Replace these with your own Supabase credentials
+  "services": [
+    {
+      "binding": "BACKEND_WORKER",
+      "service": "starter3-canary-backend"
+    }
+  ],
   "vars": {
-    "SUPABASE_URL": "https://your-project.supabase.co",
-    "SUPABASE_ANON_KEY": "your-anon-key",
-    "BACKEND_URL": "https://your-backend-worker.example.workers.dev"
+    "SUPABASE_URL": "https://iotldbnwtnzpwpyhwgmo.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_URL": "https://iotldbnwtnzpwpyhwgmo.supabase.co",
+    "BACKEND_URL": "https://starter3-canary-backend.luke-9ffworkersdev.workers.dev"
   }
-  // CRM_CAPTURE_KEY is a secret. Its value must equal backend_settings.crm_capture_key.
 }
