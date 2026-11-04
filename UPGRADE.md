@@ -1,4 +1,25 @@
-# Frontend 2.5.4
+# Frontend 3.0.0 release candidate
+
+Publication is pending. Pair this candidate with backend 3.0.0 after both
+immutable `v3.0.0` tags/releases are published. The previous public frontend
+remains 2.5.4 until that happens. See RELEASE-3.md.
+
+1. Use the backend's pinned UPGRADE-3.md with the member's existing Simon.
+   Snapshot both repositories/database/media, prove recovery, and capture custom
+   additions, edits and deleted files before changing either checkout.
+2. Merge `src/lib/crm/capture.ts` and `src/lib/crm/tracking.ts` for page/source/
+   device event provenance. Keep current capture endpoints, the authoritative
+   backend service binding/fallback, and the member's CRM_CAPTURE_KEY choice.
+3. Preserve the member's design, routes, copy, assets, domains and bindings.
+   Generate database types from their complete migrated schema, retain helpers
+   and merge newly required aliases. Do not replace custom types or their site
+   with the starter. This companion adds no frontend SQL migration.
+4. Run TypeScript, tests, lint and the production build. Verify existing pages,
+   articles/images and form-to-lead against the paired backend; check Analytics
+   event provenance and old Funnel links. Deploy only with the member's approval,
+   then record frontend VERSION 3.0.0 after verification.
+
+## Historical frontend 2.5.4
 
 This release routes server-side CRM capture through a Cloudflare service binding
 when available. It also clarifies the Simon-guided foundation handover.
