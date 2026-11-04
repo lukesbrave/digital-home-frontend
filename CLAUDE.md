@@ -45,7 +45,11 @@ Before anything else, check if the user has Node.js installed by running `node -
 2. Run each migration file from `supabase/migrations/` in order (001 through 011)
 3. Then follow the selected Backend release’s CLAUDE.md and apply its official
    migrations in order; `001_backend_core.sql` alone is not the complete backend schema.
-4. The shared database is now ready for both repos:
+4. Complete the Backend release’s `FRESH-INSTALL.md`: record all 19 paired
+   migrations (11 frontend + 8 backend), with full filenames and matching
+   checksums. Applying SQL alone leaves history empty. After deployment verify
+   authenticated `/api/home` history and all required module schema flags.
+5. After these checks the shared database is ready for both repos:
    - public read access is limited to published content and active offers
    - admin and agent operations happen through protected API routes
 
