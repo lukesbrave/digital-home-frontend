@@ -1,4 +1,12 @@
-# Starter 3.0 companion — development only
+# Starter 3.0 companion — release candidate
+
+**Current status — 2026-11-04:** Paired 3.0.0 release metadata is prepared;
+publication remains pending. Production builds, complete generated-schema builds
+with installed Studio, and the isolated deployed form/Analytics/browser checks
+pass. See RELEASE-3.md and RELEASE-PAIR.json. Candidate VERSION is now 3.0.0;
+public latest remains 2.5.4 until publication. Earlier progress notes below are
+historical, including earlier pending work and version statements.
+
 
 Keep the member’s existing frontend design, routes, tracking choices and
 credentials. The backend Analytics workspace reads the existing shared

@@ -7,9 +7,11 @@ remains 2.5.4 until that happens. See RELEASE-3.md.
 1. Use the backend's pinned UPGRADE-3.md with the member's existing Simon.
    Snapshot both repositories/database/media, prove recovery, and capture custom
    additions, edits and deleted files before changing either checkout.
-2. Merge `src/lib/crm/capture.ts` and `src/lib/crm/tracking.ts` for page/source/
-   device event provenance. Keep current capture endpoints, the authoritative
-   backend service binding/fallback, and the member's CRM_CAPTURE_KEY choice.
+2. Merge `src/lib/analytics/tracker.ts` for page/source/device event provenance.
+   Review the nullable-schema fixes in `src/app/api/content-calendar/[id]/route.ts`,
+   `src/app/blog/[slug]/page.tsx` and `src/app/sitemap.ts` against member changes.
+   Keep current capture endpoints, the authoritative backend service binding/
+   fallback, and the member's CRM_CAPTURE_KEY choice.
 3. Preserve the member's design, routes, copy, assets, domains and bindings.
    Generate database types from their complete migrated schema, retain helpers
    and merge newly required aliases. Do not replace custom types or their site
