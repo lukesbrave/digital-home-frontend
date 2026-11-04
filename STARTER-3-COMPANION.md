@@ -1,4 +1,15 @@
-# Starter 3.0 companion — release candidate
+# Starter 3.0 companion
+
+## Publication authorisation — 2026-11-04
+
+Luke approved publishing frontend 3.0.0 together with backend 3.0.0. Use the paired
+published GitHub releases and RELEASE-PAIR.json; this does not update a member's
+Home automatically. Money/Approvals screens are not bundled; the backend retains
+their capabilities for owner-authorised agents and member-built interfaces.
+Verify the pair at https://github.com/lukesbrave/digital-home-frontend/releases/tag/v3.0.0
+and https://github.com/lukesbrave/digital-home-backend/releases/tag/v3.0.0.
+The preparation notes below predate this approval and are historical snapshots.
+
 
 **Current status — 2026-11-04:** Paired 3.0.0 release metadata is prepared;
 publication remains pending. Production builds, complete generated-schema builds
