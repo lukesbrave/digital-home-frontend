@@ -17,8 +17,9 @@ No database migration or new credential is required. Do not replace customer
 content with the starter. The bundled CLAUDE.md changes separate later content
 and design work from completing a verified foundation.
 
-## Database customisations
+## Member database changes
 
 Follow the member migration rules in CLAUDE.md and the backend UPGRADE.md.
-Preserve existing migration history and review paired database types by hand;
+Review existing custom SQL and applied history before changing any filenames.
+Preserve migration history and review paired database types by hand;
 never overwrite member columns with starter definitions.
