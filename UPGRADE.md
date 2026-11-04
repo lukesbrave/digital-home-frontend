@@ -1,8 +1,8 @@
-# Frontend 3.0.0 release candidate
+# Frontend 3.0.0
 
-Publication is pending. Pair this candidate with backend 3.0.0 after both
-immutable `v3.0.0` tags/releases are published. The previous public frontend
-remains 2.5.4 until that happens. See RELEASE-3.md.
+Verify both published GitHub releases before selecting this target. Pair frontend
+`v3.0.0` with backend `v3.0.0`; a development branch does not establish publication.
+The preceding frontend baseline is 2.5.4. See RELEASE-3.md.
 
 1. Use the backend's pinned UPGRADE-3.md with the member's existing Simon.
    Snapshot both repositories/database/media, prove recovery, and capture custom

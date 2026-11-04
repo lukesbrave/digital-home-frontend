@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.0.0] — release candidate, publication pending
+## [3.0.0]
 
 - Paired companion for backend 3.0.0. Website/page events retain their page,
   source and device provenance for the backend's Analytics filters.
