@@ -30,8 +30,8 @@ If you just cloned this repo, follow these steps in order. You need both this re
 
 Using a separate chat for each repo helps Claude stay in the correct project context and avoids confusion between frontend and backend files, migrations, and environment variables.
 
-### Step 0: Check for Node.js
-Before anything else, check if the user has Node.js installed by running `node -v`. If the command fails or is not found, walk them through installing it: go to [nodejs.org](https://nodejs.org), download the LTS version, and run the installer. They need Node.js to run this project.
+### Step 0: Check for Node.js 22 or newer
+Before anything else, check if the user has Node.js installed by running `node -v`. This project requires Node.js 22 or newer. If the command fails, is not found, or reports an older version, walk them through installing a supported version: go to [nodejs.org](https://nodejs.org), download the LTS version, and run the installer. They need Node.js to run this project.
 
 ### Step 1: Create a Supabase Project
 1. Go to [supabase.com](https://supabase.com) and create a free project
@@ -43,8 +43,8 @@ Before anything else, check if the user has Node.js installed by running `node -
 ### Step 2: Run Database Migrations
 1. In your Supabase dashboard, go to **SQL Editor**
 2. Run each migration file from `supabase/migrations/` in order (001 through 011)
-3. Then run the Backend migration from the Backend Starter repo:
-   - `digital-home-backend/supabase/migrations/001_backend_core.sql`
+3. Then follow the selected Backend release’s CLAUDE.md and apply its official
+   migrations in order; `001_backend_core.sql` alone is not the complete backend schema.
 4. The shared database is now ready for both repos:
    - public read access is limited to published content and active offers
    - admin and agent operations happen through protected API routes
@@ -61,7 +61,6 @@ backend migrations; member migrations require separate review and application.
 If custom migrations already use reserved numbers, inspect their SQL, actual schema
 and applied history before deciding a mapping. Do not blindly rename or replay
 applied migrations, or rewrite history. See the backend `UPGRADE.md`.
-
 
 ### Step 3: Create an Admin User
 1. In Supabase dashboard, go to **Authentication > Users > Add user**
@@ -249,12 +248,12 @@ Join the [BraveBrand community on Skool](https://www.skool.com/bravebrand/about)
 ---
 
 ## Project Overview
-This is a Next.js 15 website starter deployed on Cloudflare Workers with Supabase as the data layer. The site is designed to speak to three audiences simultaneously: human visitors (personalized UX), AI agents (REST API), and search engines/LLMs (structured data + llms.txt).
+This is a Next.js 16 website starter deployed on Cloudflare Workers with Supabase as the data layer. The site is designed to speak to three audiences simultaneously: human visitors (personalized UX), AI agents (REST API), and search engines/LLMs (structured data + llms.txt).
 
 **This is the Frontend** — the client-facing public website. Behind it sits the **Digital Home Backend** (separate repo), which is the backend operating system — content pipeline, lead management, email sequences, analytics, and agent oversight. Both share the same Supabase database.
 
 ## Tech Stack
-- **Framework:** Next.js 15 (App Router, TypeScript, RSC by default)
+- **Framework:** Next.js 16 (App Router, TypeScript, RSC by default)
 - **Styling:** Tailwind CSS v4
 - **Hosting:** Cloudflare Workers via `@opennextjs/cloudflare` (OpenNext)
 - **Database:** Supabase (PostgreSQL) — schema in `/supabase/migrations/`
@@ -351,7 +350,7 @@ Server-side secrets must be set using `wrangler secret put`. The Cloudflare dash
   - agent-capable: selected write routes using `x-api-key`
 - Every page should include dynamic JSON-LD from the `entities` table.
 - Visitor tracking is anonymous until opt-in. No PII before email capture.
-- **CRITICAL — Shared database types:** When you modify `src/types/database.ts`, you MUST also update the same file in the Backend project. These two files must always be identical.
+- **Shared database types:** Review and merge schema changes into both repositories’ `src/types/database.ts`. Preserve member columns and custom types in both copies. A clean or committed file may still contain customisations; never replace it wholesale with starter types. Verify both builds after the merge.
 - **CRM capture:** public lead forms route through the Backend so activities and
   workflows run. Payments, memberships and entitlements must call
   `captureLeadServerSide(payload, {allowFallback:false})`; see `CRM_CAPTURE.md`.

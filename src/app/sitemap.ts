@@ -58,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Dynamic content pages
   const contentPages: MetadataRoute.Sitemap = (content || []).map((item) => ({
     url: `${SITE_URL}/blog/${item.slug}`,
-    lastModified: new Date(item.updated_at),
+    ...(item.updated_at ? {lastModified: new Date(item.updated_at)} : {}),
     changeFrequency: "weekly" as const,
     priority: item.content_type === "case_study" ? 0.8 : 0.7,
   }));

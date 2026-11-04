@@ -32,7 +32,13 @@ export function trackEvent(params: TrackEventParams): void {
 
   const payload = {
     event_type: params.eventType,
-    event_data: params.eventData || {},
+    event_data: {
+      ...params.eventData,
+      ...(typeof window !== 'undefined' ? {
+        traffic_source: new URLSearchParams(window.location.search).get('utm_source')?.slice(0,120) || (()=>{try{return document.referrer?new URL(document.referrer).hostname:'direct';}catch{return 'unknown';}})(),
+        device_type: /iPad|Tablet/i.test(navigator.userAgent)?'tablet':/Mobile|Android|iPhone/i.test(navigator.userAgent)?'mobile':'desktop',
+      } : {}),
+    },
     page_url: params.pageUrl || (typeof window !== "undefined" ? window.location.href : null),
     page_slug: params.pageSlug || (typeof window !== "undefined" ? window.location.pathname : null),
     content_id: params.contentId || null,
