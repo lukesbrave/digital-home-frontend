@@ -41,13 +41,7 @@ Before anything else, check if the user has Node.js installed by running `node -
    - **service_role secret key** (starts with `eyJ...` — keep this secret)
 
 ### Step 2: Run Database Migrations
-1. In your Supabase dashboard, go to **SQL Editor**
-2. Run each migration file from `supabase/migrations/` in order (001 through 011)
-3. Then follow the selected Backend release’s CLAUDE.md and apply its official
-   migrations in order; `001_backend_core.sql` alone is not the complete backend schema.
-4. The shared database is now ready for both repos:
-   - public read access is limited to published content and active offers
-   - admin and agent operations happen through protected API routes
+Before any SQL or admin creation, use the paired backend release’s `FRESH-INSTALL.md` and run its preflight. The same installer applies all 11 frontend files and 8 backend files and verifies all 19 exact history entries. Continue to admin setup after successful readback. After deployment verify authenticated `/api/home` history and all five module flags.
 
 ### Member database changes
 

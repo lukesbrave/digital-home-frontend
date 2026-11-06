@@ -1,7 +1,7 @@
-# Frontend 3.0.0
+# Frontend 3.0.1
 
 Verify both published GitHub releases before selecting this target. Pair frontend
-`v3.0.0` with backend `v3.0.0`; a development branch does not establish publication.
+`v3.0.1` with backend `v3.0.1`; a development branch does not establish publication.
 The preceding frontend baseline is 2.5.4. See RELEASE-3.md.
 
 1. Use the backend's pinned UPGRADE-3.md with the member's existing Simon.
@@ -19,7 +19,7 @@ The preceding frontend baseline is 2.5.4. See RELEASE-3.md.
 4. Run TypeScript, tests, lint and the production build. Verify existing pages,
    articles/images and form-to-lead against the paired backend; check Analytics
    event provenance and old Funnel links. Deploy only with the member's approval,
-   then record frontend VERSION 3.0.0 after verification.
+   then record frontend VERSION 3.0.1 after verification.
 
 ## Historical frontend 2.5.4
 

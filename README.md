@@ -65,7 +65,7 @@ Using a separate chat for each repo helps Claude stay in the correct project con
    git clone https://github.com/lukesbrave/digital-home-backend.git
    ```
 
-2. **Set up Supabase** — create one project at [supabase.com](https://supabase.com), run the Frontend migrations in `digital-home-frontend/supabase/migrations/` (`001` through `011`), then run the Backend migration in `digital-home-backend/supabase/migrations/001_backend_core.sql`
+2. **Set up Supabase** — Create a new empty project and follow the paired backend release’s `FRESH-INSTALL.md` before any SQL or admin setup. Its preflight and installer verify both versions and record all 19 files. Verify signed-in `/api/home` after deployment.
 
 3. **Set up the Frontend environment**
    ```bash
