@@ -1,0 +1,47 @@
+name: Weekly SEO Sync
+
+# Manual-first by design. This calls the Backend Starter's implemented
+# /api/seo/sync-rankings route to pull real Google Search Console numbers
+# onto every page's seo_meta row.
+# Requirements before enabling the schedule:
+# - Backend deployed and reachable at vars.SITE_URL
+# - GitHub secret API_SECRET_KEY matches the backend API_SECRET_KEY
+# - Backend GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY
+#   and GOOGLE_SEARCH_CONSOLE_SITE_URL are set — see the Backend's SEO.md
+#
+# Run this manually once, right after the real domain goes live, even before
+# the schedule is enabled — Search Console has no backfill, so every day
+# without a first run is ranking baseline you can never get back.
+
+on:
+  # schedule:
+  #   # Monday at 8am UTC
+  #   - cron: '12 8 * * 1'
+  workflow_dispatch: {}
+
+jobs:
+  seo-sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Sync Search Console rankings
+        env:
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          TIMESTAMP="$(date +%s)"
+          BODY='{}'
+          SIGNING_INPUT="POST:/api/seo/sync-rankings:${TIMESTAMP}:${BODY}"
+          SIGNATURE="$(printf "%s" "${SIGNING_INPUT}" | openssl dgst -sha256 -hmac "${API_SECRET_KEY}" -hex | awk '{print $2}')"
+
+          curl --fail-with-body \
+            -X POST "${SITE_URL}/api/seo/sync-rankings" \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: ${API_SECRET_KEY}" \
+            -H "x-timestamp: ${TIMESTAMP}" \
+            -H "x-signature: ${SIGNATURE}" \
+            -d "${BODY}"
+
+      - name: Summary
+        if: always()
+        run: echo "SEO sync completed with exit code $?"
